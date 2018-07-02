@@ -46,7 +46,7 @@ Session Merger is a python script that uses rsync to merge all Capture files fro
 
  * You'll need two sessions handy that you'd like to merge.
 
- * Session merger works recursively and will grab everything in the Capture folder you'd like to move, including all settings files (crops, moire adjustments, neutral balance, etc.)
+ * Session merger works recursively and will grab everything in the Capture folder you'd like to move, including all settings files (crops, moire adjustments, neutral balance, lens cast files, etc.)
 
  * You may have better luck merging sessions if Capture One is closed. Having it open can confuse the connection to the new settings files 
 
