@@ -18,9 +18,9 @@ This set of instructions refers to an array of Bash and Python scripts used in p
 
 [Transfer](#transfer)
 
-[Setup Instructions](#setup)
-
 [Nightmoves](#nightmoves)
+
+[Setup Instructions](#setup)
 
 
 ***
