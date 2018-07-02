@@ -3,21 +3,13 @@
 This set of instructions refers to an array of Bash and Python scripts used in production in the Digital Imaging Unit. Included are instructions for setup, running the scripts, and various considerations for running the scripts in a mac environment connected to networked storage. The scripts referred to below were designed to efficiently move files around the lab or to and from the server, rename files to Image ID from capture sequence and vice versa, or to create derivatives from files intended for the repository. The setup instructions described below have been completed on all DIU computers at the time of this writing, but have been written out here for reference in case steps need to be retraced in the future. 
 
 [Session Merger](#bookmark=id.7upfm3mpw9ob)
-
 [Upload](#bookmark=kix.gmv8p7i4oipp)
-
 [Sequencer](#bookmark=kix.3fmyvt42e5a1)
-
 [Renamer](#bookmark=id.898vujkuzsed)
-
 [Denamer](#bookmark=id.io00epgevn6d)
-
 [PDF Maker](#bookmark=id.tqi13t9mp977)
-
 [Move to RTG](#bookmark=id.jdb91g57te1)
-
 [Transfer](#bookmark=id.1fydidbctiz7)
-
 [Setup Instructions](#bookmark=id.oyb2v1ktz1y3)
 
 # Using the Scripts
@@ -54,131 +46,131 @@ Upload is a bash script that uses rsync to copy all files in a directory to anot
 
 Once files have been uploaded and verified by rsync, this script takes the directory of tif files on the server as input and creates jpeg copies with a long dimension of 3500 pixels. Jpeg derivatives are then moved to a subfolder within the original directory with the name "QC". Because files uploaded by the DIU can be large in size and number, Finder and Bridge may have difficulty loading icon previews efficiently enough to allow for a quick look at crops, rotations, etc. This script is designed to create a folder of derivatives from finalized and uploaded files that can be scrolled through quickly when performing quality control at the icon level.
 
-> 1. Open Terminal
+ 1. Open Terminal
 
-> 2. Type **upload**
+ 2. Type **upload**
 
-> 3. When prompted to drag in your output folder, drag the output folder from your Capture One session (or any other folder with files you'd like to move to the server) into Terminal and press return
+ 3. When prompted to drag in your output folder, drag the output folder from your Capture One session (or any other folder with files you'd like to move to the server) into Terminal and press return
 
-> 4. When prompted to drag in your destination folder, drag the folder from the server where you'd like your files to be transferred. Press return and your files will be uploaded.
+ 4. When prompted to drag in your destination folder, drag the folder from the server where you'd like your files to be transferred. Press return and your files will be uploaded.
 
-> 5. Once upload is complete and verified, jpeg copies of all tif files will be created within the directory and then moved to a QC folder.
+ 5. Once upload is complete and verified, jpeg copies of all tif files will be created within the directory and then moved to a QC folder.
 
-Things to Consider:
+#### Things to Consider:
 
-> * You'll need to create your destination folder on the server 
+ * You'll need to create your destination folder on the server 
 
-> * Upload works recursively and will grab everything in the folder you'd like to move, including files in subfolders. This means the CaptureOne folder within your Output folder will move to the server when uploading. This will work to your advantage if you'd like to upload an entire session to the server.
+ * Upload works recursively and will grab everything in the folder you'd like to move, including files in subfolders. This means the CaptureOne folder within your Output folder will move to the server when uploading. This will work to your advantage if you'd like to upload an entire session to the server.
 
-> * Upload sets permissions for the destination folder and all files uploaded so that everyone can read, write, and execute the files. 
+ * Upload sets permissions for the destination folder and all files uploaded so that everyone can read, write, and execute the files. 
 
-> * The -a flag will preserve original timestamps after upload
+ * The -a flag will preserve original timestamps after upload
 
-> * The Imagemagick command that creates derivatives will only convert tif files. Jpeg derivatives will be named according to the tif files they are cut from. Tifs can be named by capture sequence or Image ID.
+ * The Imagemagick command that creates derivatives will only convert tif files. Jpeg derivatives will be named according to the tif files they are cut from. Tifs can be named by capture sequence or Image ID.
 
-> * Jpegs will be created for both s and u files.
+ * Jpegs will be created for both s and u files.
 
-> * S files with a long edge shorter than 3500 pixels will be upconverted to 3500 pixels. This will have no effect at the icon view, but will be pixelated when enlarged. If you need to take a closer look at a file, open the tif. 
+ * S files with a long edge shorter than 3500 pixels will be upconverted to 3500 pixels. This will have no effect at the icon view, but will be pixelated when enlarged. If you need to take a closer look at a file, open the tif. 
 
 ## Sequencer
 
 Similar to Renamer, Sequencer is a Python script that takes a directory as input and renames the files within that directory. However, Sequencer is designed for a specific use case when there are gaps in the file naming sequence before renaming to Image IDs (as when an extra capture is found during QC and deleted from the server or local Output folder). 
 
-> 1. Open Terminal
+ 1. Open Terminal
 
-> 2. Type **sequencer**
+ 2. Type **sequencer**
 
-> 3. When prompted to enter directory, drag the folder with your files into Terminal and press return
+ 3. When prompted to enter directory, drag the folder with your files into Terminal and press return
 
-Things to Consider:
+#### Things to Consider:
 
-> * Sequencer will rename tifs or jpegs. Files must be named by capture sequence and be appended with either an 's' or a 'u'. Files without 's' or 'u' will not be resequenced.
+ * Sequencer will rename tifs or jpegs. Files must be named by capture sequence and be appended with either an 's' or a 'u'. Files without 's' or 'u' will not be resequenced.
 
-> * Tifs and jpegs should be in separate folders. The script will exit without resequencing if both file types are present in your folder.
+ * Tifs and jpegs should be in separate folders. The script will exit without resequencing if both file types are present in your folder.
 
-> * When naming your files by capture sequence, make sure there are no leading zeros in the file names. Use a 1-digit batch renamer in Capture One or in Better Finder to rename large batches of files to capture sequence.
+ * When naming your files by capture sequence, make sure there are no leading zeros in the file names. Use a 1-digit batch renamer in Capture One or in Better Finder to rename large batches of files to capture sequence.
 
-> * Double check that your images match the capture sequence on the work order. 
+ * Double check that your images match the capture sequence on the work order. 
 
 ## Renamer
 
 Renamer is a Python script that takes a directory as input and renames the files within that directory, exchanging capture sequence for Capture IDs. Use this script to rename files at the end of the quality control process when all images named by capture sequence correctly match captures on a work order.
 
-> 1. Open Terminal
+ 1. Open Terminal
 
-> 2. Type **renamer**
+ 2. Type **renamer**
 
-> 3. When prompted to enter directory, drag the folder with your files into Terminal and press return
+ 3. When prompted to enter directory, drag the folder with your files into Terminal and press return
 
-> 4. When prompted to enter Image IDs, go to your work order and click the Copy all Capture IDs link. This copies all image IDs on the work order to the clipboard in a comma-separated list. 
+ 4. When prompted to enter Image IDs, go to your work order and click the Copy all Capture IDs link. This copies all image IDs on the work order to the clipboard in a comma-separated list. 
 
-> 5. Return to Terminal and paste your Image IDs. Press return. 
+ 5. Return to Terminal and paste your Image IDs. Press return. 
 
-Things to Consider:
+#### Things to Consider:
 
-> * Renamer will rename tifs or jpegs. Tifs must be named by capture sequence and be appended with either an "s" or a "u". Jpegs must be named by capture sequence only.
+ * Renamer will rename tifs or jpegs. Tifs must be named by capture sequence and be appended with either an "s" or a "u". Jpegs must be named by capture sequence only.
 
-> * When naming your files by capture sequence, make sure there are no leading zeros in the file names. Use a 1-digit batch renamer in Capture One or in Better Finder to rename large batches of files to capture sequence.
+ * When naming your files by capture sequence, make sure there are no leading zeros in the file names. Use a 1-digit batch renamer in Capture One or in Better Finder to rename large batches of files to capture sequence.
 
-> * Double check that your images match the capture sequence on the work order. 
+ * Double check that your images match the capture sequence on the work order. 
 
-> * Double check that the number of images uploaded is twice the number of captures on your work order, if uploading s and u files. If not, make certain that only the uploaded files are needed to complete the work order.
+ * Double check that the number of images uploaded is twice the number of captures on your work order, if uploading s and u files. If not, make certain that only the uploaded files are needed to complete the work order.
 
-> * Be sure to remember to complete the renaming step in the workflow before moving files to RTG. Otherwise, we'll end up with a lot of 1s.tif, 1u.tif, 2s.tif, etc. files in the repository with no linked metadata.
+ * Be sure to remember to complete the renaming step in the workflow before moving files to RTG. Otherwise, we'll end up with a lot of 1s.tif, 1u.tif, 2s.tif, etc. files in the repository with no linked metadata.
 
-> * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Renamer process will fail when spaces are present.
+ * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Renamer process will fail when spaces are present.
 
 ## Denamer
 
 Denamer is the undo for Renamer. Denamer is a Python script that takes a directory as input and renames the files within that directory from Image ID to capture sequence. Once files have been renamed by mapping across rows in the work order, it may not be simple to batch rename by another method if any capture sequence or Image IDs are nonsequential. Use denamer if necessary at the end of the quality control process if all images named by Image ID need to be converted back to capture sequence, e.g., when a new capture needs to be added in the middle of the capture sequence.
 
-> 1. Open Terminal
+ 1. Open Terminal
 
-> 2. Type **denamer**
+ 2. Type **denamer**
 
-> 3. When prompted to enter directory, drag the folder with your files into Terminal and press return
+ 3. When prompted to enter directory, drag the folder with your files into Terminal and press return
 
-> 4. When prompted to enter Image IDs, go to your work order and click the Copy all Capture IDs link. This copies all image IDs on the work order to the clipboard in a comma-separated list. 
+ 4. When prompted to enter Image IDs, go to your work order and click the Copy all Capture IDs link. This copies all image IDs on the work order to the clipboard in a comma-separated list. 
 
-> 5. Return to Terminal and paste your Image IDs. Press return. 
+ 5. Return to Terminal and paste your Image IDs. Press return. 
 
-Things to Consider:
+#### Things to Consider:
 
-> * Note you will still need to enter Image IDs even though the final output will be a directory of files named according to capture sequence. Entering Image IDs is necessary to create the correct mapping across the rows of the work order.
+ * Note you will still need to enter Image IDs even though the final output will be a directory of files named according to capture sequence. Entering Image IDs is necessary to create the correct mapping across the rows of the work order.
 
-> * Denamer will rename tifs or jpegs. Tifs must be named by Image ID and be appended with either an "s" or a "u". Jpegs must be named by Image ID only.
+ * Denamer will rename tifs or jpegs. Tifs must be named by Image ID and be appended with either an "s" or a "u". Jpegs must be named by Image ID only.
 
-> * Double check that your images named by Image ID match the capture sequence on the work order. 
+ * Double check that your images named by Image ID match the capture sequence on the work order. 
 
-> * Double check that the number of images uploaded is twice the number of captures on your work order, if uploading s and u files. If not, make certain that only the uploaded files are needed for denaming.
+ * Double check that the number of images uploaded is twice the number of captures on your work order, if uploading s and u files. If not, make certain that only the uploaded files are needed for denaming.
 
-> * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Denamer process will fail when spaces are present.
+ * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Denamer process will fail when spaces are present.
 
 ## PDF Maker
 
 PDF Maker is a Bash script that creates pdf files for public order delivery, often for full book scans. The script takes a directory of tif files as input and creates jpeg copies with a long dimension of 1600 pixels before creating a pdf from the jpegs. Pdfs are moved into ice.repo.nypl.org/ifs/ice/PDF_Storage where they can be retrieved by Permissions for delivery. 
 
-> 1. Open Terminal
+ 1. Open Terminal
 
-> 2. Type **pdfmaker**
+ 2. Type **pdfmaker**
 
-> 3. When prompted to enter directory, drag the folder with your files into Terminal and press return
+ 3. When prompted to enter directory, drag the folder with your files into Terminal and press return
 
-> 4. Jpeg derivatives of all s files will be created within the directory and a pdf will be created from these jpegs. 
+ 4. Jpeg derivatives of all s files will be created within the directory and a pdf will be created from these jpegs. 
 
-> 5. The pdf will take the name of the directory dragged into Terminal
+ 5. The pdf will take the name of the directory dragged into Terminal
 
-> 6. The pdf will be moved into ice.repo.nypl.org/ifs/ice/PDF_Storage
+ 6. The pdf will be moved into ice.repo.nypl.org/ifs/ice/PDF_Storage
 
-> 7. All jpegs in the folder will be deleted
+ 7. All jpegs in the folder will be deleted
 
-Things to Consider:
+#### Things to Consider:
 
-> * Pdf maker will only create jpegs from s files. Files must be tifs.
+ * Pdf maker will only create jpegs from s files. Files must be tifs.
 
-> * Images in the pdf will be ordered numerically according to filename. Pdf maker will work after files have been named by Image ID, but if Image IDs are out of sequence so it will be in the pdf. Pdf maker is best used when images are still named by capture sequence. Use denamer if necessary.
+ * Images in the pdf will be ordered numerically according to filename. Pdf maker will work after files have been named by Image ID, but if Image IDs are out of sequence so it will be in the pdf. Pdf maker is best used when images are still named by capture sequence. Use denamer if necessary.
 
-> * Jpegs created from tifs named by capture sequence are given leading zeros to avoid strict alphabetical ordering issues, giving all jpegs 4-digit filenames. If files are named with Image ID or have filenames longer than 4-digits, the logic does not apply. 
+ * Jpegs created from tifs named by capture sequence are given leading zeros to avoid strict alphabetical ordering issues, giving all jpegs 4-digit filenames. If files are named with Image ID or have filenames longer than 4-digits, the logic does not apply. 
 
 ## Move to RTG
 
@@ -186,59 +178,59 @@ Move to RTG is a bash script that uses rsync to move all tif files in a director
 
 **rsync -rtvhP --remove-source-files [source files] [target]**
 
-> 1. Open Terminal
+ 1. Open Terminal
 
-> 2. Type **movetortg**
+ 2. Type **movetortg**
 
-> 3. When prompted to drag in your folder to send to rtg, drag your folder from the server with files that have passed QC into Terminal and press return
+ 3. When prompted to drag in your folder to send to rtg, drag your folder from the server with files that have passed QC into Terminal and press return
 
-> 4. All tif files with filenames longer than 4-digits will be moved to the rtg folder for processing
+ 4. All tif files with filenames longer than 4-digits will be moved to the rtg folder for processing
 
-Things to Consider:
+#### Things to Consider:
 
-> * Jpegs, files with 4-digit or fewer filenames, and CaptureOne folders are excluded
+ * Jpegs, files with 4-digit or fewer filenames, and CaptureOne folders are excluded
 
-> * Movetortg is set to work work recursively, so files in subfolders will also move to rtg if a parent folder is dragged into the Terminal window. 
+ * Movetortg is set to work work recursively, so files in subfolders will also move to rtg if a parent folder is dragged into the Terminal window. 
 
-> * Source files are removed from original folder
+ * Source files are removed from original folder
 
 ## Transfer
 
 Transfer is a python script that uses scp (secure copy) to copy all files in a directory to another computer. The script will copy files between any two computers in the DIU, including the SASB workstation. Files can either be moved from another computer to the computer you're currently working on, or vice versa. The script will guide you through the process to help you specify which directories will be moved to which location. 
 
-> 1. Open Terminal
+ 1. Open Terminal
 
-> 2. Type **transfer**
+ 2. Type **transfer**
 
-> 3. You'll be asked whether the files you'd like to move are on the computer you're currently working on. Answer y or n (not case sensitive).
+ 3. You'll be asked whether the files you'd like to move are on the computer you're currently working on. Answer y or n (not case sensitive).
 
-> 4. If you answer y, you'll be asked to drag in the folder you'd like to move
+ 4. If you answer y, you'll be asked to drag in the folder you'd like to move
 
-> 5. You'll then be asked which computer you'd like to move the folder to and you're provided with a list of computer nicknames. Type in the nickname of the computer you'd like to move your files to exactly as you see it printed in the dialog and press return
+ 5. You'll then be asked which computer you'd like to move the folder to and you're provided with a list of computer nicknames. Type in the nickname of the computer you'd like to move your files to exactly as you see it printed in the dialog and press return
 
-> 6. Next, you'll be given a list of hard drives on the remote computer. Copy and paste the name of the hard drive you'd like to send the files to and press return
+ 6. Next, you'll be given a list of hard drives on the remote computer. Copy and paste the name of the hard drive you'd like to send the files to and press return
 
-> 7. Your files will copy to the remote computer
+ 7. Your files will copy to the remote computer
 
-> 8. If you answered n to the first question, you'll be asked instead for the name of the computer where the files you'd like to transfer are located. Type the nickname of the computer into Terminal exactly as you see it and press return
+ 8. If you answered n to the first question, you'll be asked instead for the name of the computer where the files you'd like to transfer are located. Type the nickname of the computer into Terminal exactly as you see it and press return
 
-> 9. Copy and paste the name of the hard drive where your files live and press return
+ 9. Copy and paste the name of the hard drive where your files live and press return
 
-> 10. Copy and paste the name of the folder you'd like to copy and press return
+ 10. Copy and paste the name of the folder you'd like to copy and press return
 
-> 11. Drag in the folder from the computer you're working on where you'd like the files to copy to and press return
+ 11. Drag in the folder from the computer you're working on where you'd like the files to copy to and press return
 
-> 12. Your files will copy to your computer
+ 12. Your files will copy to your computer
 
-Things to Consider:
+#### Things to Consider:
 
-> * If you're copying a directory from another computer to the computer you're currently working on, you'll need to create your destination folder if not copying to the root of the drive. You can drag this folder into the Terminal window in the last step.
+ * If you're copying a directory from another computer to the computer you're currently working on, you'll need to create your destination folder if not copying to the root of the drive. You can drag this folder into the Terminal window in the last step.
 
-> * Transfer works recursively and will grab everything in the folder you'd like to move, including files in subfolders and the folder itself. 
+ * Transfer works recursively and will grab everything in the folder you'd like to move, including files in subfolders and the folder itself. 
 
-> * You can exit at any time by hitting Control+C, even if files have already started to transfer.
+ * You can exit at any time by hitting Control+C, even if files have already started to transfer.
 
-> * Permissions are set recursively to full read, write, and execute to prevent permissions problems when transferring sessions.
+ * Permissions are set recursively to full read, write, and execute to prevent permissions problems when transferring sessions.
 
 # Setup Instructions 
 
