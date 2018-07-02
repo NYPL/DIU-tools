@@ -3,13 +3,21 @@
 This set of instructions refers to an array of Bash and Python scripts used in production in the Digital Imaging Unit. Included are instructions for setup, running the scripts, and various considerations for running the scripts in a mac environment connected to networked storage. The scripts referred to below were designed to efficiently move files around the lab or to and from the server, rename files to Image ID from capture sequence and vice versa, or to create derivatives from files intended for the repository. The setup instructions described below have been completed on all DIU computers at the time of this writing, but have been written out here for reference in case steps need to be retraced in the future. 
 
 [Session Merger](#bookmark=id.7upfm3mpw9ob)
+
 [Upload](#bookmark=kix.gmv8p7i4oipp)
+
 [Sequencer](#bookmark=kix.3fmyvt42e5a1)
+
 [Renamer](#bookmark=id.898vujkuzsed)
+
 [Denamer](#bookmark=id.io00epgevn6d)
+
 [PDF Maker](#bookmark=id.tqi13t9mp977)
+
 [Move to RTG](#bookmark=id.jdb91g57te1)
+
 [Transfer](#bookmark=id.1fydidbctiz7)
+
 [Setup Instructions](#bookmark=id.oyb2v1ktz1y3)
 
 # Using the Scripts
