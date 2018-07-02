@@ -20,9 +20,9 @@ This set of instructions refers to an array of Bash and Python scripts used in p
 
 [Setup Instructions](#bookmark=id.oyb2v1ktz1y3)
 
-Using the Scripts
+# Using the Scripts
 
-# Session Merger
+## Session Merger
 
 Session Merger is a python script that uses rsync to merge all Capture files from one Capture One session to another. This script is designed to be used before files have been processed and does not copy over any files from the Selects, Output, or Trash folders from a session. The goal in writing this script was to streamline the process of merging sessions without relying on Finder/OSX merge functionality which can be problematic and will overwrite files if there are any duplicate filenames. The script will work to combine any two in-progress sessions, but was primarily intended to make session merging simpler on the book scanner.
 
@@ -46,7 +46,7 @@ Things to Consider:
 
 > * If you need to merge two sessions on two different computers, it may be easiest to first upload the Capture folder from one session to the server. Sessions can then be merged directly from the server.
 
-# Upload
+## Upload
 
 Upload is a bash script that uses rsync to copy all files in a directory to another directory. This script is designed to be used as a shortcut to the common rsync command for uploading files to the server. The command replaced by this shortcut is as follows: 
 
@@ -80,7 +80,7 @@ Things to Consider:
 
 > * S files with a long edge shorter than 3500 pixels will be upconverted to 3500 pixels. This will have no effect at the icon view, but will be pixelated when enlarged. If you need to take a closer look at a file, open the tif. 
 
-# Sequencer
+## Sequencer
 
 Similar to Renamer, Sequencer is a Python script that takes a directory as input and renames the files within that directory. However, Sequencer is designed for a specific use case when there are gaps in the file naming sequence before renaming to Image IDs (as when an extra capture is found during QC and deleted from the server or local Output folder). 
 
@@ -100,7 +100,7 @@ Things to Consider:
 
 > * Double check that your images match the capture sequence on the work order. 
 
-# Renamer
+## Renamer
 
 Renamer is a Python script that takes a directory as input and renames the files within that directory, exchanging capture sequence for Capture IDs. Use this script to rename files at the end of the quality control process when all images named by capture sequence correctly match captures on a work order.
 
@@ -128,7 +128,7 @@ Things to Consider:
 
 > * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Renamer process will fail when spaces are present.
 
-# Denamer
+## Denamer
 
 Denamer is the undo for Renamer. Denamer is a Python script that takes a directory as input and renames the files within that directory from Image ID to capture sequence. Once files have been renamed by mapping across rows in the work order, it may not be simple to batch rename by another method if any capture sequence or Image IDs are nonsequential. Use denamer if necessary at the end of the quality control process if all images named by Image ID need to be converted back to capture sequence, e.g., when a new capture needs to be added in the middle of the capture sequence.
 
@@ -154,7 +154,7 @@ Things to Consider:
 
 > * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Denamer process will fail when spaces are present.
 
-# PDF Maker
+## PDF Maker
 
 PDF Maker is a Bash script that creates pdf files for public order delivery, often for full book scans. The script takes a directory of tif files as input and creates jpeg copies with a long dimension of 1600 pixels before creating a pdf from the jpegs. Pdfs are moved into ice.repo.nypl.org/ifs/ice/PDF_Storage where they can be retrieved by Permissions for delivery. 
 
@@ -180,7 +180,7 @@ Things to Consider:
 
 > * Jpegs created from tifs named by capture sequence are given leading zeros to avoid strict alphabetical ordering issues, giving all jpegs 4-digit filenames. If files are named with Image ID or have filenames longer than 4-digits, the logic does not apply. 
 
-# Move to RTG
+## Move to RTG
 
 Move to RTG is a bash script that uses rsync to move all tif files in a directory to to the ready to go folder for processing. This script is designed to eliminate drag and drop Finder transfers for files with an immediate deadline (all other files should be moved to rtg via nightly cron job). The script will not move jpegs, CaptureOne folders, or files with Image IDs with less than 5-digits and will provide feedback when your folder has no tif files or your files need to be renamed. The script also removes source files. The command replaced by this shortcut is as follows:
 
@@ -202,7 +202,7 @@ Things to Consider:
 
 > * Source files are removed from original folder
 
-# Transfer
+## Transfer
 
 Transfer is a python script that uses scp (secure copy) to copy all files in a directory to another computer. The script will copy files between any two computers in the DIU, including the SASB workstation. Files can either be moved from another computer to the computer you're currently working on, or vice versa. The script will guide you through the process to help you specify which directories will be moved to which location. 
 
@@ -240,7 +240,7 @@ Things to Consider:
 
 > * Permissions are set recursively to full read, write, and execute to prevent permissions problems when transferring sessions.
 
-# Setup Instructions 
+## Setup Instructions 
 
 ### Placing scripts in /usr/local/bin
 
