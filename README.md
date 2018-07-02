@@ -286,13 +286,13 @@ Installation instructions:
 
  1. Open Terminal
 
- 2. Type **crontab -e**
+ 2. Type **crontab -e** to enter Vim and edit the crontab.
 
  3. Press **i** to enter Insert (edit) Mode 
 
  4. Add **'00 18 * * * /dir/where/script/is/stored/nightmoves.sh'** to the top line of the cron tab. Dragging the script into another terminal window will give you the absolute path to the script, if you're not sure. 
 
- 5. Press **Esc** and then **:q** to quit. Crontab will leave a message in the Terminal window as to whether or not the crontab has been updated.
+ 5. Press **Esc** and then **:q** to quit Vim. Crontab will leave a message in the Terminal window as to whether or not the crontab has been updated.
 
  6. Nightmoves will now run every evening at 6pm. All tif files with filenames longer than 4 digits and within folders marked with 'X's will be moved to the ready to go folder.
 
