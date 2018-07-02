@@ -26,6 +26,10 @@ This set of instructions refers to an array of Bash and Python scripts used in p
 
 # Using the Scripts
 
+
+***
+
+
 ## <a name="sessionmerger"></a>Session Merger
 
 Session Merger is a python script that uses rsync to merge all Capture files from one Capture One session to another. This script is designed to be used before files have been processed and does not copy over any files from the Selects, Output, or Trash folders from a session. The goal in writing this script was to streamline the process of merging sessions without relying on Finder/OSX merge functionality which can be problematic and will overwrite files if there are any duplicate filenames. The script will work to combine any two in-progress sessions, but was primarily intended to make session merging simpler on the book scanner.
@@ -49,6 +53,10 @@ Session Merger is a python script that uses rsync to merge all Capture files fro
  * You may have better luck merging sessions if Capture One is closed. Having it open can confuse the connection to the new settings files 
 
  * If you need to merge two sessions on two different computers, it may be easiest to first upload the Capture folder from one session to the server. Sessions can then be merged directly from the server.
+
+
+***
+
 
 ## <a name="upload"></a>Upload
 
@@ -84,6 +92,10 @@ Once files have been uploaded and verified by rsync, this script takes the direc
 
  * S files with a long edge shorter than 3500 pixels will be upconverted to 3500 pixels. This will have no effect at the icon view, but will be pixelated when enlarged. If you need to take a closer look at a file, open the tif. 
 
+
+***
+
+
 ## <a name="sequencer"></a>Sequencer
 
 Similar to Renamer, Sequencer is a Python script that takes a directory as input and renames the files within that directory. However, Sequencer is designed for a specific use case when there are gaps in the file naming sequence before renaming to Image IDs (as when an extra capture is found during QC and deleted from the server or local Output folder). 
@@ -103,6 +115,10 @@ Similar to Renamer, Sequencer is a Python script that takes a directory as input
  * When naming your files by capture sequence, make sure there are no leading zeros in the file names. Use a 1-digit batch renamer in Capture One or in Better Finder to rename large batches of files to capture sequence.
 
  * Double check that your images match the capture sequence on the work order. 
+
+
+***
+
 
 ## <a name="renamer"></a>Renamer
 
@@ -132,6 +148,10 @@ Renamer is a Python script that takes a directory as input and renames the files
 
  * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Renamer process will fail when spaces are present.
 
+
+***
+
+
 ## <a name="denamer"></a>Denamer
 
 Denamer is the undo for Renamer. Denamer is a Python script that takes a directory as input and renames the files within that directory from Image ID to capture sequence. Once files have been renamed by mapping across rows in the work order, it may not be simple to batch rename by another method if any capture sequence or Image IDs are nonsequential. Use denamer if necessary at the end of the quality control process if all images named by Image ID need to be converted back to capture sequence, e.g., when a new capture needs to be added in the middle of the capture sequence.
@@ -158,6 +178,10 @@ Denamer is the undo for Renamer. Denamer is a Python script that takes a directo
 
  * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Denamer process will fail when spaces are present.
 
+
+***
+
+
 ## <a name="pdfmaker"></a>PDF Maker
 
 PDF Maker is a Bash script that creates pdf files for public order delivery, often for full book scans. The script takes a directory of tif files as input and creates jpeg copies with a long dimension of 1600 pixels before creating a pdf from the jpegs. Pdfs are moved into ice.repo.nypl.org/ifs/ice/PDF_Storage where they can be retrieved by Permissions for delivery. 
@@ -183,6 +207,10 @@ PDF Maker is a Bash script that creates pdf files for public order delivery, oft
  * Images in the pdf will be ordered numerically according to filename. Pdf maker will work after files have been named by Image ID, but if Image IDs are out of sequence so it will be in the pdf. Pdf maker is best used when images are still named by capture sequence. Use denamer if necessary.
 
  * Jpegs created from tifs named by capture sequence are given leading zeros to avoid strict alphabetical ordering issues, giving all jpegs 4-digit filenames. If files are named with Image ID or have filenames longer than 4-digits, the logic does not apply. 
+
+
+***
+
 
 ## <a name="movetortg"></a>Move to RTG
 
