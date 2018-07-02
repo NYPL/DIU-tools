@@ -206,6 +206,10 @@ Move to RTG is a bash script that uses rsync to move all tif files in a director
 
  * Source files are removed from original folder
 
+
+***
+
+
 ## <a name="transfer"></a>Transfer
 
 Transfer is a python script that uses scp (secure copy) to copy all files in a directory to another computer. The script will copy files between any two computers in the DIU, including the SASB workstation. Files can either be moved from another computer to the computer you're currently working on, or vice versa. The script will guide you through the process to help you specify which directories will be moved to which location. 
@@ -243,6 +247,10 @@ Transfer is a python script that uses scp (secure copy) to copy all files in a d
  * You can exit at any time by hitting Control+C, even if files have already started to transfer.
 
  * Permissions are set recursively to full read, write, and execute to prevent permissions problems when transferring sessions.
+
+
+***
+
 
 # <a name="setup"></a>Setup Instructions 
 
