@@ -20,6 +20,8 @@ This set of instructions refers to an array of Bash and Python scripts used in p
 
 [Setup Instructions](#setup)
 
+[Nightmoves](#nightmoves)
+
 
 ***
 
@@ -210,7 +212,7 @@ PDF Maker is a Bash script that creates pdf files for public order delivery, oft
 
 ## <a name="movetortg"></a>Move to RTG
 
-Move to RTG is a bash script that uses rsync to move all tif files in a directory to to the ready to go folder for processing. This script is designed to eliminate drag and drop Finder transfers for files with an immediate deadline (all other files should be moved to rtg via nightly cron job). The script will not move jpegs, CaptureOne folders, or files with Image IDs with less than 5-digits and will provide feedback when your folder has no tif files or your files need to be renamed. The script also removes source files. The command replaced by this shortcut is as follows:
+Move to RTG is a bash script that uses rsync to move all tif files in a directory to to the ready to go folder for processing. This script is designed to eliminate drag and drop Finder transfers for files with an immediate deadline (all other files should be moved to rtg via nightly cron job - see nightmoves below). The script will not move jpegs, CaptureOne folders, or files with Image IDs with less than 5-digits and will provide feedback when your folder has no tif files or your files need to be renamed. The script also removes source files. The command replaced by this shortcut is as follows:
 
 **rsync -rtvhP --remove-source-files [source files] [target]**
 
@@ -272,6 +274,37 @@ Transfer is a python script that uses scp (secure copy) to copy all files in a d
 
  * Permissions are set recursively to full read, write, and execute to prevent permissions problems when transferring sessions.
 
+
+***
+
+
+## <a name="nightmoves"></a>Nightmoves
+
+Nightmoves is a bash script that uses rsync to move all tif files in a flagged directory to to the ready to go folder for processing. Directories are flagged by adding an 'X' to the beginning and end of the directory name. This script is designed to be run as a nightly cron job to reduce server traffic during the day. Files are moved to the ready to go folder for processing at 6pm nightly so that the majority of file processing is done overnight. This has the added benefit of leaving the ready to go folder empty during the day for quick processing of time-sensitive projects. by drag and drop Finder transfers for files with an immediate deadline (all other files should be moved to rtg via nightly cron job). The script will not move jpegs, QC folders, CaptureOne folders, or files with Image IDs with less than 5-digits and writes to a log on the machine the script is run from. The script also removes source files. 
+
+Installation instructions:
+
+ 1. Open Terminal
+
+ 2. Type **crontab -e**
+
+ 3. Press 'i' to enter Insert (edit) Mode 
+
+ 4. Add '00 18 * * * /dir/where/script/is/stored/nightmoves.sh' to the top line of the cron tab. Dragging the script into another terminal window will give you the absolute path to the script, if you're not sure. 
+
+ 5. Press Esc and then ':q' to quit. Crontab will leave a message in the Terminal window as to whether or not the crontab has been updated.
+
+ 6. Nightmoves will now run every evening at 6pm. All tif files with filenames longer than 4 digits and within folders marked with 'X's will be moved to the ready to go folder.
+
+#### Things to Consider:
+
+ * Jpegs, files with 4-digit or fewer filenames, and CaptureOne folders are excluded
+
+ * Nightmoves is set to work work recursively, so files in subfolders will also move to rtg if a parent folder is flagged. 
+
+ * Source files are removed from original folder
+
+ * The computer running the script will need to be turned on and connected to the server in order to run at the selected time.
 
 ***
 
