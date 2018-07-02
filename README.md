@@ -1,4 +1,4 @@
-Summary
+# Summary
 
 This set of instructions refers to an array of Bash and Python scripts used in production in the Digital Imaging Unit. Included are instructions for setup, running the scripts, and various considerations for running the scripts in a mac environment connected to networked storage. The scripts referred to below were designed to efficiently move files around the lab or to and from the server, rename files to Image ID from capture sequence and vice versa, or to create derivatives from files intended for the repository. The setup instructions described below have been completed on all DIU computers at the time of this writing, but have been written out here for reference in case steps need to be retraced in the future. 
 
@@ -22,7 +22,7 @@ This set of instructions refers to an array of Bash and Python scripts used in p
 
 Using the Scripts
 
-Session Merger
+# Session Merger
 
 Session Merger is a python script that uses rsync to merge all Capture files from one Capture One session to another. This script is designed to be used before files have been processed and does not copy over any files from the Selects, Output, or Trash folders from a session. The goal in writing this script was to streamline the process of merging sessions without relying on Finder/OSX merge functionality which can be problematic and will overwrite files if there are any duplicate filenames. The script will work to combine any two in-progress sessions, but was primarily intended to make session merging simpler on the book scanner.
 
@@ -46,7 +46,7 @@ Things to Consider:
 
 > * If you need to merge two sessions on two different computers, it may be easiest to first upload the Capture folder from one session to the server. Sessions can then be merged directly from the server.
 
-Upload
+# Upload
 
 Upload is a bash script that uses rsync to copy all files in a directory to another directory. This script is designed to be used as a shortcut to the common rsync command for uploading files to the server. The command replaced by this shortcut is as follows: 
 
@@ -54,15 +54,15 @@ Upload is a bash script that uses rsync to copy all files in a directory to anot
 
 Once files have been uploaded and verified by rsync, this script takes the directory of tif files on the server as input and creates jpeg copies with a long dimension of 3500 pixels. Jpeg derivatives are then moved to a subfolder within the original directory with the name "QC". Because files uploaded by the DIU can be large in size and number, Finder and Bridge may have difficulty loading icon previews efficiently enough to allow for a quick look at crops, rotations, etc. This script is designed to create a folder of derivatives from finalized and uploaded files that can be scrolled through quickly when performing quality control at the icon level.
 
-> 6. Open Terminal
+> 1. Open Terminal
 
-> 7. Type **upload**
+> 2. Type **upload**
 
-> 8. When prompted to drag in your output folder, drag the output folder from your Capture One session (or any other folder with files you'd like to move to the server) into Terminal and press return
+> 3. When prompted to drag in your output folder, drag the output folder from your Capture One session (or any other folder with files you'd like to move to the server) into Terminal and press return
 
-> 9. When prompted to drag in your destination folder, drag the folder from the server where you'd like your files to be transferred. Press return and your files will be uploaded.
+> 4. When prompted to drag in your destination folder, drag the folder from the server where you'd like your files to be transferred. Press return and your files will be uploaded.
 
-> 10. Once upload is complete and verified, jpeg copies of all tif files will be created within the directory and then moved to a QC folder.
+> 5. Once upload is complete and verified, jpeg copies of all tif files will be created within the directory and then moved to a QC folder.
 
 Things to Consider:
 
@@ -80,7 +80,7 @@ Things to Consider:
 
 > * S files with a long edge shorter than 3500 pixels will be upconverted to 3500 pixels. This will have no effect at the icon view, but will be pixelated when enlarged. If you need to take a closer look at a file, open the tif. 
 
-Sequencer
+# Sequencer
 
 Similar to Renamer, Sequencer is a Python script that takes a directory as input and renames the files within that directory. However, Sequencer is designed for a specific use case when there are gaps in the file naming sequence before renaming to Image IDs (as when an extra capture is found during QC and deleted from the server or local Output folder). 
 
@@ -100,19 +100,19 @@ Things to Consider:
 
 > * Double check that your images match the capture sequence on the work order. 
 
-Renamer
+# Renamer
 
 Renamer is a Python script that takes a directory as input and renames the files within that directory, exchanging capture sequence for Capture IDs. Use this script to rename files at the end of the quality control process when all images named by capture sequence correctly match captures on a work order.
 
-> 4. Open Terminal
+> 1. Open Terminal
 
-> 5. Type **renamer**
+> 2. Type **renamer**
 
-> 6. When prompted to enter directory, drag the folder with your files into Terminal and press return
+> 3. When prompted to enter directory, drag the folder with your files into Terminal and press return
 
-> 7. When prompted to enter Image IDs, go to your work order and click the Copy all Capture IDs link. This copies all image IDs on the work order to the clipboard in a comma-separated list. 
+> 4. When prompted to enter Image IDs, go to your work order and click the Copy all Capture IDs link. This copies all image IDs on the work order to the clipboard in a comma-separated list. 
 
-> 8. Return to Terminal and paste your Image IDs. Press return. 
+> 5. Return to Terminal and paste your Image IDs. Press return. 
 
 Things to Consider:
 
@@ -128,7 +128,7 @@ Things to Consider:
 
 > * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Renamer process will fail when spaces are present.
 
-Denamer
+# Denamer
 
 Denamer is the undo for Renamer. Denamer is a Python script that takes a directory as input and renames the files within that directory from Image ID to capture sequence. Once files have been renamed by mapping across rows in the work order, it may not be simple to batch rename by another method if any capture sequence or Image IDs are nonsequential. Use denamer if necessary at the end of the quality control process if all images named by Image ID need to be converted back to capture sequence, e.g., when a new capture needs to be added in the middle of the capture sequence.
 
@@ -154,7 +154,7 @@ Things to Consider:
 
 > * Make sure that no spaces are present between elements of the directory file name. Use underscores in place of spaces. The Denamer process will fail when spaces are present.
 
-PDF Maker
+# PDF Maker
 
 PDF Maker is a Bash script that creates pdf files for public order delivery, often for full book scans. The script takes a directory of tif files as input and creates jpeg copies with a long dimension of 1600 pixels before creating a pdf from the jpegs. Pdfs are moved into ice.repo.nypl.org/ifs/ice/PDF_Storage where they can be retrieved by Permissions for delivery. 
 
@@ -180,7 +180,7 @@ Things to Consider:
 
 > * Jpegs created from tifs named by capture sequence are given leading zeros to avoid strict alphabetical ordering issues, giving all jpegs 4-digit filenames. If files are named with Image ID or have filenames longer than 4-digits, the logic does not apply. 
 
-Move to RTG
+# Move to RTG
 
 Move to RTG is a bash script that uses rsync to move all tif files in a directory to to the ready to go folder for processing. This script is designed to eliminate drag and drop Finder transfers for files with an immediate deadline (all other files should be moved to rtg via nightly cron job). The script will not move jpegs, CaptureOne folders, or files with Image IDs with less than 5-digits and will provide feedback when your folder has no tif files or your files need to be renamed. The script also removes source files. The command replaced by this shortcut is as follows:
 
@@ -202,7 +202,7 @@ Things to Consider:
 
 > * Source files are removed from original folder
 
-Transfer
+# Transfer
 
 Transfer is a python script that uses scp (secure copy) to copy all files in a directory to another computer. The script will copy files between any two computers in the DIU, including the SASB workstation. Files can either be moved from another computer to the computer you're currently working on, or vice versa. The script will guide you through the process to help you specify which directories will be moved to which location. 
 
@@ -240,17 +240,17 @@ Things to Consider:
 
 > * Permissions are set recursively to full read, write, and execute to prevent permissions problems when transferring sessions.
 
-Setup Instructions 
+# Setup Instructions 
 
-Placing scripts in /usr/local/bin
+### Placing scripts in /usr/local/bin
 
 The scripts are stored on ICE (ice.repo.nypl.org/ifs/ice) under Info/Scripts. Scripts will need to be copied into your usr/local/bin before they can be used. The usr/local/bin is a safe space to call scripts from and is included in the folders that Terminal searches when commands are run (your PATH). Navigate to the usr/local/bin by using the Go to Folder function in Finder or using the Shift+Command+G key combination and entering "/usr/local/bin". If Finder says the folder can't be found, you'll need to create it. Navigate to /usr first and then create a new folder called "local". Navigate to the local folder and create another folder within it with the name "bin". Alternatively, you can type **cd /usr** in Terminal to change the directory to /usr and press return. Then type **mkdir local** to make a local folder and press return. Type **cd local** to change the directory to local and press return. Then type **mkdir bin** to create a bin folder.
 
-Adding Executable Permission
+### Adding Executable Permission
 
 Scripts will need executable permission added to the files in order to run them, if the permission hasn't been added already. To test this, you can drag the script into Terminal and press return. Terminal will give you a Permission denied error if the script is not executable. To add executable permission type **chmod +x** into Terminal and then drag in your script and press return. Terminal will give you a new Bash prompt and your script should now be ready to go.
 
-Creating Aliases
+### Creating Aliases
 
 Nicknames can be created for scripts or Bash command you use often by editing your Bash profile in a Terminal application called Nano (or Vim if you wish). Nano is a command line text editor that can edit system files. To edit your bash profile, type **nano .bash_profile** in Terminal and press return. There may be aliases already set up on your computer, in which case you'll see some text in Nano. If no aliases have been set up, your Nano screen will be blank. In order to create a new alias, you'll need to add a basic equivalency statement to the .bash_profile using the following example as a pattern: 
 
@@ -262,7 +262,7 @@ In this example we're telling Terminal that we'd like to run the renamer.py scri
 
 Once the statement has been added to the profile, press Control+x and then press Y when asked about saving the modified buffer and then press return to write to the .bash_profile system file. Type **source .bash_profile** to load the new alias for immediate use. Now, when you type **renamer** in Terminal, the script will run without any further input. 
 
-Installing Dependencies
+### Installing Dependencies
 
 Many of the scripts included here require additional applications to be installed through Terminal before they can be run. The renamer, denamer, and file transfer scripts rely entirely on Python or Bash, which are preinstalled in MacOS. However, the QC and pdfmaker scripts rely on ImageMagick and GNU parallel, both of which will need to be installed before those scripts can be run. ImageMagick is a powerful command line image editing application and GNU parallel is a shell tool that will allow multiple processes to be run on multiple cores of a single computer or across multiple computers at once. The simplest way to install ImageMagick and GNU parallel is through Homebrew, which is a command line package installer. Homebrew has a rather large library of precompiled packages (known as formula in Homebrew world) available on Github that can be downloaded and installed using the **brew install** command. Homebrew installs applications in their own folders in usr/local/Cellar folder and provides symbolic links in /usr/local. In other words, Homebrew installs command line applications in a way that can be easily undone and will not affect preinstalled applications. As of July 2017, Homebrew can be installed by pasting the following into Terminal:
 
@@ -272,7 +272,7 @@ Once Homebrew installation is complete, Homebrew can be used to install ImageMag
 
 6/29/18 update - Upload has been rewritten as a python script with new dependencies, tqdm and joblib. These will need to be installed using pip (install instructions found at: [https://pip.pypa.io/en/stable/installing/](https://pip.pypa.io/en/stable/installing/)). After installing pip, tqdm and joblib can be installed with the **pip install** command. The pip install command may need to be preceeded by a **sudo -H**. The Session Merger script is also new as of 6/29/18 and also requires tqdm and joblib.
 
-SSH Keys
+### SSH Keys
 
 Transfer relies on shared ssh keys in order to connect to other machines on the network. Static IP addresses have been assigned (with assistance from ITG) to each DIU computer to facilitate seamless connections. A list of these IP addresses can be found at **ice.repo.nypl.org/ifs/ice/Info/Network/DIU_IP_Addresses.csv**. Instructions for sharing ssh keys between computers on the network can be found here: **[https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2). **Keys must be shared in both directions between all machines. Password verification can be turned off by modifying the sshd_config file as discussed in the ssh key sharing instructions linked above. 
 
