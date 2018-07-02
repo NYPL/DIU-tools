@@ -20,6 +20,8 @@ This set of instructions refers to an array of Bash and Python scripts used in p
 
 [Setup Instructions](#setup)
 
+***
+
 # Using the Scripts
 
 ## <a name="sessionmerger"></a>Session Merger
