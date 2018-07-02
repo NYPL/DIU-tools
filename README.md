@@ -254,7 +254,7 @@ Scripts will need executable permission added to the files in order to run them,
 
 Nicknames can be created for scripts or Bash command you use often by editing your Bash profile in a Terminal application called Nano (or Vim if you wish). Nano is a command line text editor that can edit system files. To edit your bash profile, type **nano .bash_profile** in Terminal and press return. There may be aliases already set up on your computer, in which case you'll see some text in Nano. If no aliases have been set up, your Nano screen will be blank. In order to create a new alias, you'll need to add a basic equivalency statement to the .bash_profile using the following example as a pattern: 
 
-**alias renamer="/usr/local/bin/renamer.py" **
+** alias renamer="/usr/local/bin/renamer.py" **
 
 In this example we're telling Terminal that we'd like to run the renamer.py script, which is located in the usr/local/bin, by typing "renamer" into Terminal. You may want to leave yourself a note about the alias being added to Terminal in case it becomes unclear in the future. To do this, write a note above the script and convert it to a comment by beginning with #. Comments are not read by the system. See the following as an example:
 
@@ -274,5 +274,5 @@ Once Homebrew installation is complete, Homebrew can be used to install ImageMag
 
 ### SSH Keys
 
-Transfer relies on shared ssh keys in order to connect to other machines on the network. Static IP addresses have been assigned (with assistance from ITG) to each DIU computer to facilitate seamless connections. A list of these IP addresses can be found at **ice.repo.nypl.org/ifs/ice/Info/Network/DIU_IP_Addresses.csv**. Instructions for sharing ssh keys between computers on the network can be found here: **[https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2). **Keys must be shared in both directions between all machines. Password verification can be turned off by modifying the sshd_config file as discussed in the ssh key sharing instructions linked above. 
+Transfer relies on shared ssh keys in order to connect to other machines on the network. Static IP addresses have been assigned (with assistance from ITG) to each DIU computer to facilitate seamless connections. A list of these IP addresses can be found at **ice.repo.nypl.org/ifs/ice/Info/Network/DIU_IP_Addresses.csv**. Instructions for sharing ssh keys between computers on the network can be found here: **[https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2).** Keys must be shared in both directions between all machines. Password verification can be turned off by modifying the sshd_config file as discussed in the ssh key sharing instructions linked above.
 
