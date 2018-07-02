@@ -26,10 +26,6 @@ This set of instructions refers to an array of Bash and Python scripts used in p
 
 # Using the Scripts
 
-
-***
-
-
 ## <a name="sessionmerger"></a>Session Merger
 
 Session Merger is a python script that uses rsync to merge all Capture files from one Capture One session to another. This script is designed to be used before files have been processed and does not copy over any files from the Selects, Output, or Trash folders from a session. The goal in writing this script was to streamline the process of merging sessions without relying on Finder/OSX merge functionality which can be problematic and will overwrite files if there are any duplicate filenames. The script will work to combine any two in-progress sessions, but was primarily intended to make session merging simpler on the book scanner.
