@@ -36,7 +36,7 @@ Session Merger is a python script that uses rsync to merge all Capture files fro
 
  5. The script will then use rsync to merge all captures and settings files from the second Capture One session into the first.
 
-Things to Consider:
+#### Things to Consider:
 
  * You'll need two sessions handy that you'd like to merge.
 
