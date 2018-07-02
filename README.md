@@ -58,11 +58,11 @@ Session Merger is a python script that uses rsync to merge all Capture files fro
 
 ## <a name="upload"></a>Upload
 
-Upload is a bash script that uses rsync to copy all files in a directory to another directory. This script is designed to be used as a shortcut to the common rsync command for uploading files to the server. The command replaced by this shortcut is as follows: 
+Upload is a python script that uses rsync to copy all files in a directory to another directory. This script is designed to be used as a shortcut to the common rsync command for uploading files to the server. The command replaced by this shortcut is as follows: 
 
 **rsync -ratvhP /path/to/directory/with/files/* [target]**
 
-Once files have been uploaded and verified by rsync, this script takes the directory of tif files on the server as input and creates jpeg copies with a long dimension of 3500 pixels. Jpeg derivatives are then moved to a subfolder within the original directory with the name "QC". Because files uploaded by the DIU can be large in size and number, Finder and Bridge may have difficulty loading icon previews efficiently enough to allow for a quick look at crops, rotations, etc. This script is designed to create a folder of derivatives from finalized and uploaded files that can be scrolled through quickly when performing quality control at the icon level.
+Because files uploaded by the DIU can be large in size and number, Finder and Bridge may have difficulty loading icon previews efficiently enough to allow for a quick look at crops, rotations, etc. This script is designed to create a folder of derivatives from finalized and uploaded files that can be scrolled through quickly when performing quality control at the icon level. Once files have been uploaded and verified by rsync, this script takes the directory of tif files on the server as input and creates jpeg copies with a long dimension of 3500 pixels in a subfolder within the original directory with the name "QC". 
 
  1. Open Terminal
 
@@ -72,7 +72,7 @@ Once files have been uploaded and verified by rsync, this script takes the direc
 
  4. When prompted to drag in your destination folder, drag the folder from the server where you'd like your files to be transferred. Press return and your files will be uploaded.
 
- 5. Once upload is complete and verified, jpeg copies of all tif files will be created within the directory and then moved to a QC folder.
+ 5. Once upload is complete and verified, jpeg copies of all tif files will be created within a new QC directory.
 
 #### Things to Consider:
 
