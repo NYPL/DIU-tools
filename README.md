@@ -290,7 +290,7 @@ Installation instructions:
 
  3. Press **i** to enter Insert (edit) Mode 
 
- 4. Add **'00 18 * * * /dir/where/script/is/stored/nightmoves.sh'** to the top line of the cron tab. Dragging the script into another terminal window will give you the absolute path to the script, if you're not sure. 
+ 4. Add **'00 18 * * * /dir/where/script/is/stored/nightmoves.sh'** to the top line of the cron tab. The address may need to be modified depending on where the script is stored locally. Dragging the script into another terminal window will give you the absolute path to the script, if you're not sure.
 
  5. Press **Esc** and then **:q** to quit Vim. Crontab will leave a message in the Terminal window as to whether or not the crontab has been updated.
 
