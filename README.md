@@ -212,7 +212,7 @@ PDF Maker is a Bash script that creates pdf files for public order delivery, oft
 
 ## <a name="movetortg"></a>Move to RTG
 
-Move to RTG is a bash script that uses rsync to move all tif files in a directory to to the ready to go folder for processing. This script is designed to eliminate drag and drop Finder transfers for files with an immediate deadline (all other files should be moved to rtg via nightly cron job - see nightmoves below). The script will not move jpegs, CaptureOne folders, or files with Image IDs with less than 5-digits and will provide feedback when your folder has no tif files or your files need to be renamed. The script also removes source files. The command replaced by this shortcut is as follows:
+Move to RTG is a python script that uses rsync to move all repo-ready tif files in a directory to the ready to go folder for processing. This script is designed to eliminate drag and drop Finder transfers for files with an immediate deadline (all other files should be moved to rtg via nightly cron job). The script will only move tif files with a 5-digit or greater length filename with an ‘s’ or a ‘u’ in the filename. It will not move jpegs, CaptureOne folders, or files with Image IDs with less than 5-digits and will provide feedback when your folder has no tif files or your files need to be renamed. The script also removes source files. The command replaced by this shortcut is as follows:
 
 **rsync -rtvhP --remove-source-files [source files] [target]**
 
