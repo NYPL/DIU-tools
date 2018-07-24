@@ -1,6 +1,6 @@
 # Summary
 
-This set of instructions refers to an array of Bash and Python scripts used in production in the Digital Imaging Unit. Included are instructions for setup, running the scripts, and various considerations for running the scripts in a mac environment connected to networked storage. The scripts referred to below were designed to efficiently move files around the lab or to and from the server, rename files to Image ID from capture sequence and vice versa, or to create derivatives from files intended for the repository. The setup instructions described below have been completed on all DIU computers at the time of this writing, but have been written out here for reference in case steps need to be retraced in the future. 
+This set of instructions refers to an array of Bash and Python scripts used in production in New York Public Library's Digital Imaging Unit. Included are instructions for setup, running the scripts, and various considerations for running the scripts in a mac environment connected to networked storage. The scripts referred to below were designed to efficiently move files around the lab or to and from the server, rename files to Image ID from capture sequence and vice versa, or to create derivatives from files intended for the repository. The setup instructions described below have been completed on all DIU computers at the time of this writing, but have been written out here for reference in case steps need to be retraced in the future. 
 
 [Session Merger](#sessionmerger)
 
