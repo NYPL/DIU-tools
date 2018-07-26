@@ -2,10 +2,8 @@
 
 import os
 import subprocess
-# provides a nice progress bar
 import tqdm
-import textwrap
-
+import re
 
 output_folder = raw_input("\nPlease drag in the folder you would like to send to rtg and press [Enter]:\n\n").rstrip()
 rtg_folder = '/Volumes/ice/rtg'
@@ -19,14 +17,24 @@ def check_for_spaces():
 		pass
 
 def check_for_rename():
+
+	renamelist = []
 	for file in os.listdir(output_folder):
-		if not len(file) > 9 and 's' not in file or 'u' not in file:
-			print(textwrap.fill('There are files in your folder that need to be renamed. Please rename and try again. Exiting.'))
-			exit('\n') 
+		if 'tif' in file:
+			if not re.search(r'^\d{5,}(s|u).tif$', file):
+				renamelist.append(file)
+				
+	if renamelist:
+		for item in renamelist:
+			print(item)
+		print('\nPlease rename files listed above and try again.\n')
+		exit()
+	else:
+		pass
 
 def get_files():
 	file_dict = {}
-	file_dict[output_folder] = [file for file in os.listdir(output_folder) if 's.tif' in file or 'u.tif' in file and len(file) > 9]
+	file_dict[output_folder] = [file for file in os.listdir(output_folder) if re.search(r'^\d{5,}(s|u).tif$', file)]
 
 	return file_dict
 
