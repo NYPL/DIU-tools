@@ -21,8 +21,9 @@ def check_for_rename():
 	renamelist = []
 	for file in os.listdir(output_folder):
 		if 'tif' in file:
-			if not re.search(r'^\d{5,}(s|u).tif$', file):
-				renamelist.append(file)
+			if not file.startswith('._'):
+				if not re.search(r'^[\w-]{5,}(s|u).tif$', file):
+					renamelist.append(file)
 				
 	if renamelist:
 		for item in renamelist:
@@ -34,7 +35,7 @@ def check_for_rename():
 
 def get_files():
 	file_dict = {}
-	file_dict[output_folder] = [file for file in os.listdir(output_folder) if re.search(r'^\d{5,}(s|u).tif$', file)]
+	file_dict[output_folder] = [file for file in os.listdir(output_folder) if re.search(r'^[\w-]{5,}(s|u).tif$', file)]
 
 	return file_dict
 

@@ -16,6 +16,8 @@ This set of instructions refers to an array of Bash and Python scripts used in p
 
 [Move to RTG](#movetortg)
 
+[Repo](#repo)
+
 [Transfer](#transfer)
 
 [Nightmoves](#nightmoves)
@@ -231,6 +233,26 @@ Move to RTG is a python script that uses rsync to move all repo-ready tif files 
  * Movetortg is set to work work recursively, so files in subfolders will also move to rtg if a parent folder is dragged into the Terminal window. 
 
  * Source files are removed from original folder
+
+
+***
+
+
+## <a name="repo"></a>Repo
+
+Repo is a python script that converts a comma-separated list of Image IDs copied from an MMS work order to a list of Image IDs separated by newlines for repo check via Image Get. The script uses regular expressions to do a very simple find and replace, exchanging ‘, ‘ for ‘\n’. The purpose of this script is to create the simplest workaround possible for inputting large numbers of Image IDs into Image Get for repo check, which requires newline separation whereas MMS outputs a comma-separated list. Previously this step in the repo check process was accomplished by doing a find and replace using Sublime Text. 
+
+ 1. Open Terminal
+
+ 2. Type **repo**
+
+ 3. When prompted to ‘Copy all Capture IDs’ on your work order, click the ‘Copy all Capture IDs button on your work order. This will put a comma-separated list of Image IDs in your computer’s clipboard.
+
+ 4. Press return
+
+ 5. The text in your clipboard will be converted to a newline-separated list suitable for Image Get input.
+
+ 6. Navigate and login to Image Get and paste your Image IDs into the input box (command + v)
 
 
 ***

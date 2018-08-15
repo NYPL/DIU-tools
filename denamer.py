@@ -4,9 +4,8 @@ import os
 import readline
 import pdb
 
-print
-directory= raw_input('Please enter directory for images: ').strip()
-ImageIDs = raw_input('Please enter Image IDs in a comma-separated list: ').split(',')
+directory= raw_input('\nmPlease enter directory for images: ').strip()
+ImageIDs = raw_input('\nPlease enter Image IDs in a comma-separated list: ').split(',')
 
 ext=['s','u']
 tifs=[]
