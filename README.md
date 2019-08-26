@@ -24,6 +24,7 @@ This set of instructions refers to an array of Bash and Python scripts used in p
 
 [Setup Instructions](#setup)
 
+[Vendor-Digitization-Tools](#vendor-digitization-tools)
 
 ***
 
@@ -367,3 +368,8 @@ Once Homebrew installation is complete, Homebrew can be used to install ImageMag
 
 Transfer relies on shared ssh keys in order to connect to other machines on the network. Static IP addresses have been assigned (with assistance from ITG) to each DIU computer to facilitate seamless connections. A list of these IP addresses can be found at **ice.repo.nypl.org/ifs/ice/Info/Network/DIU_IP_Addresses.csv**. Instructions for sharing ssh keys between computers on the network can be found here: **[https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2).** Keys must be shared in both directions between all machines. Password verification can be turned off by modifying the sshd_config file as discussed in the ssh key sharing instructions linked above.
 
+
+
+## <a name="vendor-digitization-tools"></a>Vendor Digitization Tools
+
+This folder contains the tools created during the Vendor/Mass Digitization workflow. It includes scripts for CSV creation, file counting, file management, and OCR related processes. More can be read about the individual scripts in their respective folders. 
